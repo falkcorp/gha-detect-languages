@@ -50,7 +50,7 @@ concurrency:
 jobs:
   release:
     name: Automated Release
-    uses: jdfalk/ghcommon/.github/workflows/reusable-release.yml@aac93cb1c5148c3274cac30c401a0e27fab45526
+    uses: jdfalk/ghcommon/.github/workflows/reusable-release.yml@2b9f83e6f0b215e8a7e709e7df9f8aec293f01a7
     with:
       release-type: ${{ inputs.release-type || 'auto' }}
       build-target: 'all'
