@@ -8,7 +8,7 @@ repository with intelligent overrides and fallback handling.
 ```yaml
 - name: Detect languages
   id: detect
-  uses: jdfalk/detect-languages-action@v1
+  uses: falkcorp/gha-detect-languages@v1
   with:
     skip-detection: false
     build-target: all
@@ -23,18 +23,18 @@ repository with intelligent overrides and fallback handling.
 
 ## Inputs
 
-| Input              | Description                                                           | Default                                       |
-| ------------------ | --------------------------------------------------------------------- | --------------------------------------------- |
-| `skip-detection`   | Skip file-based detection                                             | `false`                                       |
-| `build-target`     | Build targets to validate (comma-separated)                           | `all`                                         |
-| `go-enabled`       | Override Go detection (true/false/auto)                               | `auto`                                        |
-| `python-enabled`   | Override Python detection                                             | `auto`                                        |
-| `rust-enabled`     | Override Rust detection                                               | `auto`                                        |
-| `frontend-enabled` | Override Frontend detection                                           | `auto`                                        |
-| `docker-enabled`   | Override Docker detection                                             | `auto`                                        |
-| `protobuf-enabled` | Override Protobuf detection                                           | `auto`                                        |
-| `use-docker`       | Run the action inside the published container image                   | `false`                                       |
-| `docker-image`     | Docker image reference (tag or digest) used when `use-docker` is true | `ghcr.io/jdfalk/detect-languages-action:main` |
+| Input              | Description                                                           | Default                                      |
+| ------------------ | --------------------------------------------------------------------- | -------------------------------------------- |
+| `skip-detection`   | Skip file-based detection                                             | `false`                                      |
+| `build-target`     | Build targets to validate (comma-separated)                           | `all`                                        |
+| `go-enabled`       | Override Go detection (true/false/auto)                               | `auto`                                       |
+| `python-enabled`   | Override Python detection                                             | `auto`                                       |
+| `rust-enabled`     | Override Rust detection                                               | `auto`                                       |
+| `frontend-enabled` | Override Frontend detection                                           | `auto`                                       |
+| `docker-enabled`   | Override Docker detection                                             | `auto`                                       |
+| `protobuf-enabled` | Override Protobuf detection                                           | `auto`                                       |
+| `use-docker`       | Run the action inside the published container image                   | `false`                                      |
+| `docker-image`     | Docker image reference (tag or digest) used when `use-docker` is true | `ghcr.io/falkcorp/gha-detect-languages:main` |
 
 ## Outputs
 
@@ -78,11 +78,11 @@ with:
 ### Force Docker execution
 
 ```yaml
-- uses: jdfalk/detect-languages-action@v1
+- uses: falkcorp/gha-detect-languages@v1
   id: detect
   with:
     use-docker: true
-    docker-image: ghcr.io/jdfalk/detect-languages-action:main
+    docker-image: ghcr.io/falkcorp/gha-detect-languages:main
 ```
 
 ## Features
