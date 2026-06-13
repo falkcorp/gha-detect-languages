@@ -1,68 +1,51 @@
 <!-- file: CLAUDE.md -->
-<!-- version: 3.0.0 -->
-<!-- guid: 3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f -->
-<!-- last-edited: 2026-01-25 -->
+<!-- version: 1.0.0 -->
+<!-- guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890 -->
+<!-- last-edited: 2026-06-13 -->
 
-# CLAUDE.md
+# gha-detect-languages
 
-> **NOTE:** This file is a pointer. All Claude/AI agent and workflow
-> instructions are centralized in the `.github/instructions/` and
-> `.github/prompts/` directories.
+A composite GitHub Action that detects programming languages in a repository.
 
-## 🎯 Quick Reference
+## Coding Standards
 
-**Main Documentation:**
+Org-wide coding standards are in the `.standards/` git submodule (cloned from
+`https://github.com/falkcorp/.github`). Always clone with
+`git clone --recurse-submodules` so these are available.
 
-- [Copilot Instructions](.github/instructions/copilot-instructions.md) - Primary
-  AI agent configuration
-- [Instructions Directory](.github/instructions/) - All coding standards and
-  language-specific rules
-- [Prompts Directory](.github/prompts/) - Specialized prompts for specific tasks
+Key files:
 
-**For complete list of all instruction files, see [AGENTS.md](AGENTS.md)**
+- **File headers (MANDATORY):** `.standards/instructions/file-headers.md`
+- **Commit format:** `.standards/instructions/commit-messages.md`
 
-## 🚨 CRITICAL: Documentation Update Protocol
+## Architecture
 
-This repository uses direct-edit documentation workflow:
+This is a single-file composite action. All detection logic is embedded as a
+Python script directly inside `action.yml` using `shell: python`. There is no
+separate source package.
 
-- Edit documentation directly in target files
-- Always update version headers when making changes
-- Do not use legacy doc-update scripts (create-doc-update.sh,
-  doc_update_manager.py)
-- Follow semantic versioning for version numbers
+**Key files:**
 
-## 🔧 Git Operations Policy
+- `action.yml` — The entire action: inputs, outputs, and embedded Python
+  detection script
+- `README.md` — Usage documentation and examples
+- `CHANGELOG.md` — Version history
 
-**Preferred order for git operations:**
+## Design Pattern
 
-1. **MCP GitHub tools** (preferred) - Use when available
-2. **safe-ai-util** (fallback) - Provides safety checks and logging
-3. **Native git** (last resort) - Use only when other options unavailable
+- Composite action using `shell: python` to embed the entire Python script
+- All environment variables passed as action inputs
+- Outputs exposed via GitHub Actions output commands
+- No external Python dependencies — stdlib only
 
-**Use VS Code tasks for non-git operations only** (build, lint, test, generate).
+## Build & Test
 
-## 📋 Key Instruction Categories
+No build step required. To test locally, use `act` or push to a test branch and
+observe the action output in GitHub Actions.
 
-### Workflow & Process
+## Critical Constraints
 
-- Commit messages (conventional commits format)
-- Pull request descriptions
-- Code review guidelines
-- Test generation standards
-- Security best practices
-
-### Language-Specific Rules
-
-- Go, Python, TypeScript, JavaScript, Rust, Shell
-- Protobuf, Markdown, JSON, JSONC, HTML/CSS
-- GitHub Actions workflows
-
-### Specialized Prompts
-
-- Code review, documentation generation
-- Bug reports, feature requests
-- Merge conflict resolution
-- Test generation
-
-> For all Claude, Copilot, or workflow tasks, **refer to the files in
-> `.github/instructions/` and `.github/prompts/`**.
+- All language detection logic changes must be made in the embedded Python
+  script within `action.yml`
+- Do not split the action into a separate Python package
+- Follow GitHub Actions composite action best practices
